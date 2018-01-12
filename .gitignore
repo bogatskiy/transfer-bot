@@ -1,0 +1,7 @@
+*.log
+.DS_Store
+.idea
+node_modules/
+npm-debug.log.2381052756
+package-lock.json
+config.json
