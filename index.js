@@ -6,8 +6,11 @@ const mongoose = require('./lib/mongoose')
 const {driver, passenger, pasTripFrom, pasTripTo, driveTripFrom, stopTrip, continueTrip, wait} = require('./lib/callback-query')
 
 const {start, sendContact, changeRoleOnText, help} = require('./lib/ontext')
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> 3f30d1cd84a0164d183cda61ea5cf64243ccd7bd
 
 
 bot.on('message', sendContact)
@@ -61,6 +64,10 @@ bot.on('callback_query', query => {
       break
     case  'sochi_driver':
       driveTripFrom(query)
+<<<<<<< HEAD
+=======
+
+>>>>>>> 3f30d1cd84a0164d183cda61ea5cf64243ccd7bd
       break
   }
 })
