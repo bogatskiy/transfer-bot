@@ -8,6 +8,8 @@ const {driver, passenger, pasTripFrom, pasTripTo, driveTripFrom, stopTrip, conti
 const {start, sendContact, changeRoleOnText, help} = require('./lib/ontext')
 
 
+
+
 bot.on('message', sendContact)
 bot.onText(/\/start/, start)
 bot.onText(/\/changerole/, changeRoleOnText)
@@ -60,10 +62,10 @@ bot.on('callback_query', query => {
     case  'sochi_driver':
       driveTripFrom(query)
       break
-    case 'wait':
-      wait(query)
-      break
   }
 })
+
+const { query } = require('./lib/callback-query/qwe')
+bot.on('callback_query', query)
 
 bot.on('polling_error', error => console.log(error))
