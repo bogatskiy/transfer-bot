@@ -1,9 +1,10 @@
 process.env['NTBA_FIX_319'] = 1
 
+
 const bot = require('./lib/bot')
 const mongoose = require('./lib/mongoose')
-const { start, sendContact, changeRoleOnText, help } = require('./lib/ontext')
-const { query, queryDriver } = require('./lib/callback-query')
+const {start, sendContact, changeRoleOnText, help} = require('./lib/ontext')
+const {query, queryDriver} = require('./lib/callback-query')
 
 bot.on('message', sendContact)
 
@@ -15,3 +16,21 @@ bot.on('callback_query', query)
 bot.on('callback_query', queryDriver)
 
 bot.on('polling_error', e => console.log(e))
+
+const Watcher = require('./watcher')
+const dbWatcher = require('./watcher/workers/dbWatcher')
+
+const watcher = new Watcher(
+  [{
+    name: dbWatcher,
+    bot,
+    mongoose
+  }], 1000)
+
+watcher.start()
+
+process.on('SIGTERM', () => {
+  watcher.stop()
+  mongoose.disconnect()
+  process.exit(0)
+})
