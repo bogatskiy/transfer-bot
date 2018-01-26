@@ -7,8 +7,8 @@ const TripSchema = new Schema({
   id: {type: Number, requred: true},
   phone_number: {type: String, requred: true},
   first_name: {type: String, requred: false},
-  from: {type: String},
-  to: {type: String},
+  from: {type: Number},
+  to: {type: Number},
   date: {type: Date},
   completed: {type: Boolean, default: false, requred: true}
 })
