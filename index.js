@@ -1,10 +1,11 @@
 process.env['NTBA_FIX_319'] = 1
 
-
 const bot = require('./lib/bot')
 const mongoose = require('./lib/mongoose')
 const {start, sendContact, changeRoleOnText, help} = require('./lib/ontext')
 const {query, queryDriver, queryPassenger} = require('./lib/callback-query')
+const Watcher = require('./watcher')
+const tripLifetimeWatcher = require('./watcher/workers/tripLifetimeWatcher')
 
 bot.on('message', sendContact)
 
@@ -18,12 +19,9 @@ bot.on('callback_query', queryPassenger)
 
 bot.on('polling_error', e => console.log(e))
 
-const Watcher = require('./watcher')
-const dbWatcher = require('./watcher/workers/dbWatcher')
-
 const watcher = new Watcher(
   [{
-    name: dbWatcher,
+    name: tripLifetimeWatcher,
     bot,
     mongoose
   }], 1000)
